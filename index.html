@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>谁是伪人？</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: #f5ecd7;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(139, 119, 90, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(139, 119, 90, 0.06) 0%, transparent 50%);
+  color: #3b2e1e;
+  font-family: Georgia, 'Times New Roman', serif;
+  line-height: 1.6;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 clamp(8px, 3vw, 20px);
+  min-height: 100vh;
+}
+
+.header {
+  text-align: center;
+  padding: clamp(16px, 5vw, 28px) 0 clamp(10px, 3vw, 18px);
+  border-bottom: 2px solid #8b775a;
+  border-image: repeating-linear-gradient(
+    -45deg,
+    #c4a35a 0px, #c4a35a 3px,
+    #3b2e1e 3px, #3b2e1e 6px
+  ) 2;
+  margin-bottom: clamp(12px, 3vw, 20px);
+}
+
+.header h1 {
+  font-family: Impact, 'Arial Black', 'Helvetica Neue', sans-serif;
+  font-size: clamp(1.3rem, 5vw, 1.7rem);
+  color: #6b3a1f;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-shadow: 1px 1px 0 rgba(180, 140, 90, 0.4);
+  margin-bottom: 4px;
+}
+
+.story {
+  background: rgba(245, 236, 215, 0.7);
+  border: 1px solid #c4b898;
+  border-radius: 4px;
+  padding: clamp(10px, 3vw, 16px);
+  margin-bottom: clamp(12px, 3vw, 20px);
+  font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+  color: #5a4a32;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.overview {
+  margin-bottom: clamp(14px, 4vw, 22px);
+}
+
+.overview h2 {
+  font-family: Impact, 'Arial Black', sans-serif;
+  font-size: clamp(1rem, 3.5vw, 1.2rem);
+  color: #6b3a1f;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(6px, 2vw, 12px);
+}
+
+.overview-item {
+  text-align: center;
+}
+
+.overview-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 2px solid #8b775a;
+  border-radius: 3px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.overview-item .label {
+  display: block;
+  margin-top: 4px;
+  font-size: clamp(0.65rem, 2vw, 0.75rem);
+  color: #8b775a;
+  font-weight: bold;
+}
+
+.members-section h2 {
+  font-family: Impact, 'Arial Black', sans-serif;
+  font-size: clamp(1rem, 3.5vw, 1.2rem);
+  color: #6b3a1f;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.member-card {
+  background: #faf3e6;
+  border: 2px solid #8b775a;
+  border-radius: 4px;
+  padding: clamp(10px, 2.5vw, 14px);
+  margin-bottom: clamp(10px, 2.5vw, 16px);
+  box-shadow:
+    2px 2px 0 rgba(139, 119, 90, 0.2),
+    inset 0 0 20px rgba(139, 119, 90, 0.05);
+}
+
+.member-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.member-number {
+  width: 28px;
+  height: 28px;
+  background: #6b3a1f;
+  color: #f5ecd7;
+  font-family: Impact, 'Arial Black', sans-serif;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.member-name {
+  font-family: Impact, 'Arial Black', sans-serif;
+  font-size: clamp(0.95rem, 3vw, 1.1rem);
+  color: #3b2e1e;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.member-desc {
+  font-size: clamp(0.72rem, 2.2vw, 0.8rem);
+  color: #6b5a3f;
+  margin-left: auto;
+  text-align: right;
+  line-height: 1.3;
+}
+
+.slider-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  cursor: ew-resize;
+  border: 2px solid #c4b898;
+  border-radius: 2px;
+  user-select: none;
+  -webkit-user-select: none;
+  margin-bottom: 8px;
+  background: #3b2e1e;
+}
+
+.slider-before,
+.slider-after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.slider-before img,
+.slider-after img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.slider-after {
+  clip-path: inset(0 0 0 50%);
+}
+
+.slider-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 44px;
+  transform: translateX(-50%);
+  cursor: ew-resize;
+  z-index: 2;
+  background: transparent;
+}
+
+.slider-handle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  background: #d4843a;
+  box-shadow: 0 0 6px rgba(0,0,0,0.4);
+}
+
+.slider-handle::after {
+  content: '⟷';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  background: #d4843a;
+  border: 2px solid #f5ecd7;
+  border-radius: 50%;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.5);
+  color: #f5ecd7;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.slider-label {
+  position: absolute;
+  bottom: 6px;
+  font-size: clamp(0.6rem, 1.8vw, 0.7rem);
+  color: #f5ecd7;
+  background: rgba(0,0,0,0.55);
+  padding: 2px 8px;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.slider-label-before {
+  left: 6px;
+}
+
+.slider-label-after {
+  right: 6px;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+}
+
+.checkbox-row input[type="checkbox"] {
+  width: 24px;
+  height: 24px;
+  accent-color: #c44a1a;
+  flex-shrink: 0;
+  cursor: pointer;
+  margin: 8px;
+}
+
+.checkbox-row label {
+  font-size: clamp(0.82rem, 2.5vw, 0.92rem);
+  color: #5a3a1f;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  padding: 10px 0;
+}
+
+.submit-section {
+  padding: clamp(14px, 4vw, 24px) 0 clamp(20px, 5vw, 32px);
+  text-align: center;
+}
+
+.btn-submit {
+  display: inline-block;
+  padding: clamp(12px, 3vw, 16px) clamp(28px, 8vw, 48px);
+  font-family: Impact, 'Arial Black', sans-serif;
+  font-size: clamp(1rem, 3.5vw, 1.2rem);
+  color: #f5ecd7;
+  background: #8b3a1a;
+  border: 2px solid #c4a35a;
+  border-radius: 4px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow:
+    0 3px 0 #5a2410,
+    0 4px 10px rgba(0,0,0,0.25);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.btn-submit:active {
+  transform: translateY(2px);
+  box-shadow:
+    0 1px 0 #5a2410,
+    0 2px 4px rgba(0,0,0,0.2);
+}
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 20, 10, 0.85);
+  z-index: 1000;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.modal-overlay.active {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: clamp(20px, 8vw, 60px);
+}
+
+.modal-content {
+  background: #faf3e6;
+  border: 3px solid #8b775a;
+  border-radius: 6px;
+  max-width: 440px;
+  width: 100%;
+  margin-bottom: 40px;
+  box-shadow:
+    4px 4px 0 rgba(139, 119, 90, 0.3),
+    0 8px 30px rgba(0,0,0,0.5);
+  position: relative;
+}
+
+.modal-header {
+  background: #6b3a1f;
+  color: #f5ecd7;
+  padding: clamp(10px, 2.5vw, 16px);
+  text-align: center;
+  border-bottom: 2px solid #c4a35a;
+}
+
+.modal-header h2 {
+  font-family: Impact, 'Arial Black', sans-serif;
+  font-size: clamp(1rem, 3.5vw, 1.3rem);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.modal-body {
+  padding: clamp(12px, 3vw, 18px);
+}
+
+.modal-score {
+  text-align: center;
+  padding: 10px 0 8px;
+}
+
+.modal-score .score-num {
+  font-family: Impact, 'Arial Black', sans-serif;
+  font-size: clamp(1.8rem, 7vw, 2.5rem);
+  color: #c44a1a;
+}
+
+.modal-score .score-text {
+  font-size: clamp(0.85rem, 2.8vw, 1rem);
+  color: #5a4a32;
+}
+
+.modal-rank {
+  text-align: center;
+  font-size: clamp(0.78rem, 2.3vw, 0.9rem);
+  color: #8b775a;
+  padding: 10px 0 12px;
+  border-bottom: 1px dashed #c4b898;
+  margin-bottom: 12px;
+}
+
+.modal-ending {
+  text-align: center;
+  padding: 6px 0 2px;
+}
+
+.modal-ending .ending-title {
+  font-family: Impact, 'Arial Black', sans-serif;
+  font-size: clamp(1rem, 3.5vw, 1.25rem);
+  color: #c44a1a;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+}
+
+.modal-ending .ending-text {
+  font-size: clamp(0.78rem, 2.3vw, 0.88rem);
+  color: #5a4a32;
+  font-style: italic;
+  line-height: 1.5;
+  padding: 0 4px;
+}
+
+.result-section {
+  margin-bottom: 12px;
+}
+
+.result-section h3 {
+  font-family: Impact, 'Arial Black', sans-serif;
+  font-size: clamp(0.82rem, 2.5vw, 0.92rem);
+  margin-bottom: 4px;
+  letter-spacing: 0.03em;
+}
+
+.result-section.correct h3 { color: #2d7a2d; }
+.result-section.missed h3 { color: #8b5a1a; }
+.result-section.wrong h3 { color: #8b2020; }
+
+.result-list {
+  list-style: none;
+  padding: 0;
+}
+
+.result-list li {
+  font-size: clamp(0.75rem, 2.2vw, 0.85rem);
+  padding: 3px 0;
+  border-bottom: 1px dotted #e0d5c0;
+}
+
+.result-list li:last-child { border-bottom: none; }
+
+.knowledge-section {
+  margin-top: 16px;
+  border-top: 2px solid #c4a35a;
+  padding-top: 12px;
+}
+
+.knowledge-section h3 {
+  font-family: Impact, 'Arial Black', sans-serif;
+  font-size: clamp(0.82rem, 2.5vw, 0.92rem);
+  color: #6b3a1f;
+  margin-bottom: 8px;
+  letter-spacing: 0.03em;
+}
+
+.knowledge-item {
+  background: rgba(196, 163, 90, 0.08);
+  border-left: 3px solid #c4a35a;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  border-radius: 0 3px 3px 0;
+}
+
+.knowledge-item .ki-name {
+  font-weight: bold;
+  font-size: clamp(0.78rem, 2.3vw, 0.85rem);
+  color: #6b3a1f;
+}
+
+.knowledge-item .ki-feature {
+  font-size: clamp(0.7rem, 2vw, 0.78rem);
+  color: #c44a1a;
+  margin: 2px 0;
+}
+
+.knowledge-item .ki-detail {
+  font-size: clamp(0.7rem, 2vw, 0.78rem);
+  color: #5a4a32;
+  line-height: 1.5;
+}
+
+.modal-footer {
+  padding: 10px clamp(12px, 3vw, 18px) clamp(14px, 3vw, 18px);
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-close,
+.btn-retry {
+  padding: 10px 24px;
+  font-family: Impact, 'Arial Black', sans-serif;
+  font-size: clamp(0.82rem, 2.5vw, 0.9rem);
+  border-radius: 3px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border: 2px solid #8b775a;
+}
+
+.btn-close {
+  background: #f5ecd7;
+  color: #5a4a32;
+}
+
+.btn-retry {
+  background: #8b3a1a;
+  color: #f5ecd7;
+  border-color: #c4a35a;
+}
+
+.toast {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #8b2020;
+  color: #f5ecd7;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-family: Impact, 'Arial Black', sans-serif;
+  font-size: 0.85rem;
+  z-index: 2000;
+  display: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.toast.show {
+  display: block;
+  animation: toastIn 0.3s ease;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>谁是伪人？</h1>
+</div>
+
+<div class="story">
+  探险队野外任务归来，营地门卫须在"例行检测"中找出伪装成人类的"伪人"。伪人外表与常人无异，却无法正确使用椅子——它们的坐姿和椅子会出现违背人体工学原理的怪异现象。根据人体工学知识判断：合格坐姿者放行，异常者隔离。拖动滑块对比每位队员的"档案照"与"实拍"，找出伪人。
+</div>
+
+<div class="overview">
+  <h2>营地全员一览</h2>
+  <div class="overview-grid">
+    <div class="overview-item">
+      <img src="figs/ALL_before.png" alt="档案照整体图">
+      <span class="label">档案照</span>
+    </div>
+    <div class="overview-item">
+      <img src="figs/ALL_after.png" alt="实拍整体图">
+      <span class="label">实拍</span>
+    </div>
+  </div>
+</div>
+
+<div class="members-section">
+  <h2>逐个审查</h2>
+  <div id="memberList"></div>
+</div>
+
+<div class="submit-section">
+  <button class="btn-submit" id="btnSubmit">提交检测结果</button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>检测报告</h2>
+    </div>
+    <div class="modal-body">
+      <div class="modal-score">
+        <span class="score-num" id="scoreNum">0/4</span>
+        <p class="score-text">正确找出伪人</p>
+      </div>
+      <div class="modal-ending" id="modalEnding"></div>
+      <div class="modal-rank" id="modalRank"></div>
+      <div class="result-section correct" id="sectionCorrect"></div>
+      <div class="result-section missed" id="sectionMissed"></div>
+      <div class="result-section wrong" id="sectionWrong"></div>
+      <div class="knowledge-section" id="sectionKnowledge"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-close" id="btnClose">关闭</button>
+      <button class="btn-retry" id="btnRetry">重新检测</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const MEMBERS = [
+  { id: 1, name: '老马',  desc: '40岁 · 络腮胡 · 探险帽',       isFake: false, explain: '表情疲倦，坐姿正确，无异常' },
+  { id: 2, name: '阿布',  desc: '30岁 · 光头 · 强壮 · 战术背心',  isFake: true,  feature: '椅子垫高20cm，双脚悬空，扶手过高', knowledge: '膝关节应自然弯曲约90°，双脚平稳触地，悬空会压迫大腿神经。扶手过高导致耸肩，手臂无法自然平放，肘关节难以维持90°自然夹角。' },
+  { id: 3, name: '叶林',  desc: '28岁 · 圆框眼镜 · 短辫',        isFake: false, explain: '表情紧张，坐姿正确，无异常' },
+  { id: 4, name: '铁锤',  desc: '35岁 · 矮胖 · 工装手套',        isFake: true,  feature: '网布坐垫塌陷大洞，椅腿扭曲', knowledge: '劣质网布易塌陷，大体重人群建议选高密度海绵或高弹力网布坐垫。气压棒须认准SGS/TUV/BIFMA认证，级别在Class 3或以上。' },
+  { id: 5, name: '小昭',  desc: '24岁 · 瘦小 · 红色冲锋衣',       isFake: false, explain: '表情疲倦，坐姿正确，无异常' },
+  { id: 6, name: '大魁',  desc: '32岁 · 高瘦 · 黄发',            isFake: true,  feature: '椅背断裂后倒，气压棒裂纹', knowledge: '靠背支撑腰部，断裂导致腰椎悬空无支撑。气压棒关乎安全，裂纹极危险，须认准Class 3/4认证。' },
+  { id: 7, name: '阿强',  desc: '26岁 · 短发 · 左臂纹身',         isFake: false, explain: '表情害怕，坐姿正确，无异常' },
+  { id: 8, name: '老周',  desc: '50岁 · 白发 · 戴护腰',          isFake: true,  feature: '触手扶手，头枕反装，脖子后仰', knowledge: '扶手高度应让双肩自然下沉，肘关节约90°。头枕反装导致仰头，显示器顶端应与视线平行，避免长时间仰头造成颈椎负担。' }
+];
+
+const FAKE_IDS = [2, 4, 6, 8];
+const COUNTER_URL = 'https://6657-upup.hardly2333.workers.dev/completions';
+const STORAGE_KEY = 'webgame_fh_submitted';
+
+let submittedBefore = false;
+let firstRank = null;
+let submitting = false;
+
+function buildMemberCards() {
+  const container = document.getElementById('memberList');
+  MEMBERS.forEach(m => {
+    const card = document.createElement('div');
+    card.className = 'member-card';
+    card.innerHTML =
+      `<div class="member-header">
+        <span class="member-number">${m.id}</span>
+        <span class="member-name">${m.name}</span>
+        <span class="member-desc">${m.desc}</span>
+      </div>
+      <div class="slider-container" data-member="${m.id}">
+        <div class="slider-before">
+          <img src="figs/${m.id}_before.png" alt="${m.name} 档案照" draggable="false">
+        </div>
+        <div class="slider-after">
+          <img src="figs/${m.id}_after.png" alt="${m.name} 实拍" draggable="false">
+        </div>
+        <div class="slider-handle"></div>
+        <span class="slider-label slider-label-before">档案照</span>
+        <span class="slider-label slider-label-after">实拍</span>
+      </div>
+      <div class="checkbox-row">
+        <input type="checkbox" id="chk-${m.id}" value="${m.id}">
+        <label for="chk-${m.id}">标记为伪人</label>
+      </div>`;
+    container.appendChild(card);
+  });
+}
+
+function initSliders() {
+  document.querySelectorAll('.slider-container').forEach(container => {
+    const after = container.querySelector('.slider-after');
+    const handle = container.querySelector('.slider-handle');
+    let dragging = false;
+    let position = 50;
+
+    function updatePosition(clientX) {
+      const rect = container.getBoundingClientRect();
+      const x = clientX - rect.left;
+      position = Math.max(0, Math.min(100, (x / rect.width) * 100));
+      after.style.clipPath = `inset(0 0 0 ${position}%)`;
+      handle.style.left = position + '%';
+    }
+
+    function setInitialPosition() {
+      after.style.clipPath = 'inset(0 0 0 50%)';
+      handle.style.left = '50%';
+    }
+
+    function onStart(e) {
+      e.preventDefault();
+      dragging = true;
+      container.style.cursor = 'ew-resize';
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      updatePosition(clientX);
+    }
+
+    function onMove(e) {
+      if (!dragging) return;
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      updatePosition(clientX);
+    }
+
+    function onEnd() {
+      dragging = false;
+    }
+
+    function onClick(e) {
+      if (e.target === handle || e.target.closest('.slider-handle')) return;
+      updatePosition(e.clientX);
+    }
+
+    setInitialPosition();
+
+    handle.addEventListener('mousedown', onStart);
+    handle.addEventListener('touchstart', onStart, { passive: false });
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('touchmove', onMove, { passive: false });
+    window.addEventListener('mouseup', onEnd);
+    window.addEventListener('touchend', onEnd);
+    container.addEventListener('click', onClick);
+  });
+}
+
+function showToast(msg, duration) {
+  duration = duration || 2000;
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toast._timeout);
+  toast._timeout = setTimeout(() => toast.classList.remove('show'), duration);
+}
+
+function getCheckedIds() {
+  const checked = [];
+  MEMBERS.forEach(m => {
+    const cb = document.getElementById('chk-' + m.id);
+    if (cb && cb.checked) checked.push(m.id);
+  });
+  return checked;
+}
+
+function getEndingTitle(checkedIds, correctChecked, wrongChecked) {
+  if (checkedIds.length === 8) {
+    return {
+      title: '宁可错杀一千',
+      text: '你把所有人都当成了伪人。四个真伪人确实落网了，但四名无辜队员也被你隔离——营地现在人手紧缺，今晚的岗哨排班得重新安排了。'
+    };
+  }
+  if (wrongChecked.length >= 2 && correctChecked.length === 0) {
+    return {
+      title: '敌我不分',
+      text: '真正的队员全被你当成了威胁，伪人却大摇大摆进了安全区。门卫同志，你到底是来帮哪边的？'
+    };
+  }
+  if (checkedIds.length === 1 && correctChecked.length === 0) {
+    return {
+      title: '敷衍了事',
+      text: '你就随便勾了一个交差是吧。伪人已经混入营地，而你这个门卫的态度比伪人更让人担心。'
+    };
+  }
+
+  const score = correctChecked.length;
+  const endings = {
+    0: { title: '有眼无珠', text: '你一个伪人都没认出来。四个异质混入了安全区，今晚营地恐怕不会太平了。' },
+    1: { title: '初窥门径', text: '你只揪出了一个伪人，剩下三个已经混进了队员队伍。营地暂时安全，但隐患未除。' },
+    2: { title: '半信半疑', text: '你识别了一半的威胁，还有漏网之鱼潜伏在队伍中。加油，你对椅子的观察力还有进步空间。' },
+    3: { title: '火眼金睛', text: '几乎全对！只有一个漏网之鱼溜进了安全区。你的检测能力值得信赖，队员们可以安心休整了。' },
+    4: { title: '明察秋毫', text: '四个伪人全部伏法，安全区固若金汤。营地今晚为你加餐——你是当之无愧的首席检测员。' }
+  };
+  return endings[score];
+}
+
+function buildResult(checkedIds) {
+  const correctChecked = checkedIds.filter(id => FAKE_IDS.includes(id));
+  const missed = FAKE_IDS.filter(id => !checkedIds.includes(id));
+  const wrongChecked = checkedIds.filter(id => !FAKE_IDS.includes(id));
+
+  const score = correctChecked.length;
+
+  document.getElementById('scoreNum').textContent = score + ' / 4';
+
+  const ending = getEndingTitle(checkedIds, correctChecked, wrongChecked);
+  document.getElementById('modalEnding').innerHTML =
+    '<div class="ending-title">🏆「' + ending.title + '」</div>' +
+    '<div class="ending-text">' + ending.text + '</div>';
+
+  const sectionCorrect = document.getElementById('sectionCorrect');
+  const sectionMissed = document.getElementById('sectionMissed');
+  const sectionWrong = document.getElementById('sectionWrong');
+  const sectionKnowledge = document.getElementById('sectionKnowledge');
+
+  if (correctChecked.length > 0) {
+    const names = correctChecked.map(id => MEMBERS.find(m => m.id === id).name).join('、');
+    sectionCorrect.innerHTML = '<h3>✅ 正确标记</h3><ul class="result-list"><li>' + names + '</li></ul>';
+    sectionCorrect.style.display = '';
+  } else {
+    sectionCorrect.style.display = 'none';
+  }
+
+  if (missed.length > 0) {
+    const names = missed.map(id => MEMBERS.find(m => m.id === id).name).join('、');
+    sectionMissed.innerHTML = '<h3>❌ 漏判（未识别的伪人）</h3><ul class="result-list"><li>' + names + '</li></ul>';
+    sectionMissed.style.display = '';
+  } else {
+    sectionMissed.style.display = 'none';
+  }
+
+  if (wrongChecked.length > 0) {
+    const items = wrongChecked.map(id => {
+      const m = MEMBERS.find(m => m.id === id);
+      return '<li>' + m.name + '：' + m.explain + '</li>';
+    }).join('');
+    sectionWrong.innerHTML = '<h3>⚠️ 误判（错把真人当伪人）</h3><ul class="result-list">' + items + '</ul>';
+    sectionWrong.style.display = '';
+  } else {
+    sectionWrong.style.display = 'none';
+  }
+
+  const knowledgeItems = correctChecked.map(id => {
+    const m = MEMBERS.find(m => m.id === id);
+    return `<div class="knowledge-item">
+      <div class="ki-name">🪑 ${m.name}</div>
+      <div class="ki-feature">异常：${m.feature}</div>
+      <div class="ki-detail">${m.knowledge}</div>
+    </div>`;
+  }).join('');
+
+  if (knowledgeItems) {
+    sectionKnowledge.innerHTML = '<h3>人体工学知识点</h3>' + knowledgeItems;
+    sectionKnowledge.style.display = '';
+  } else {
+    sectionKnowledge.style.display = 'none';
+  }
+}
+
+async function fetchRank() {
+  if (submittedBefore && firstRank !== null) {
+    return firstRank;
+  }
+
+  if (submittedBefore) return null;
+
+  try {
+    const resp = await fetch(COUNTER_URL);
+    if (!resp.ok) throw new Error('Counter error');
+    const data = await resp.json();
+    firstRank = data.value;
+    return data.value;
+  } catch (e) {
+    return null;
+  }
+}
+
+function showModal() {
+  document.getElementById('modalOverlay').classList.add('active');
+}
+
+function hideModal() {
+  document.getElementById('modalOverlay').classList.remove('active');
+}
+
+function resetAll() {
+  MEMBERS.forEach(m => {
+    const cb = document.getElementById('chk-' + m.id);
+    if (cb) cb.checked = false;
+  });
+  document.querySelectorAll('.slider-after').forEach(after => {
+    after.style.clipPath = 'inset(0 0 0 50%)';
+  });
+  document.querySelectorAll('.slider-handle').forEach(handle => {
+    handle.style.left = '50%';
+  });
+}
+
+document.getElementById('btnSubmit').addEventListener('click', async () => {
+  if (submitting) return;
+  const checkedIds = getCheckedIds();
+  if (checkedIds.length === 0) {
+    showToast('请至少勾选一名疑似伪人');
+    return;
+  }
+
+  submitting = true;
+  buildResult(checkedIds);
+
+  const rankEl = document.getElementById('modalRank');
+  rankEl.textContent = '计数加载中…';
+
+  showModal();
+
+  const rank = await fetchRank();
+  if (rank !== null) {
+    rankEl.textContent = '你是第 ' + rank + ' 位完成检测的营地门卫';
+    if (!submittedBefore) {
+      submittedBefore = true;
+      try { localStorage.setItem(STORAGE_KEY, '1'); } catch(e) {}
+    }
+  } else {
+    rankEl.textContent = '计数服务暂不可用';
+  }
+
+  submitting = false;
+});
+
+document.getElementById('btnClose').addEventListener('click', hideModal);
+document.getElementById('btnRetry').addEventListener('click', () => {
+  resetAll();
+  submitting = false;
+  hideModal();
+});
+
+document.getElementById('modalOverlay').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('modalOverlay')) hideModal();
+});
+
+if (typeof localStorage !== 'undefined') {
+  if (localStorage.getItem(STORAGE_KEY)) {
+    submittedBefore = true;
+  }
+}
+
+buildMemberCards();
+initSliders();
+</script>
+
+</body>
+</html>
