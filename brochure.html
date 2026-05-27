@@ -46,58 +46,84 @@ body {
 }
 
 .page-a-header .tag {
-  font-family: Impact, 'Arial Black', sans-serif;
-  font-size: 3.2mm;
+  font-family: 'Courier New', monospace;
+  font-size: 3mm;
   color: #8b775a;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
 }
 
 .page-a-header h1 {
   font-family: Impact, 'Arial Black', sans-serif;
-  font-size: 7mm;
+  font-size: 8mm;
   color: #6b3a1f;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  margin: 3mm 0 2mm;
+  margin: 2mm 0 2mm;
 }
 
-.page-a-header h2 {
+.page-a-header .issue-date {
   font-family: 'Courier New', monospace;
-  font-size: 3.8mm;
-  color: #8b5a1a;
-  letter-spacing: 0.1em;
+  font-size: 3mm;
+  color: #8b775a;
+  letter-spacing: 0.08em;
 }
 
 .page-a-body {
   padding: 0 4mm;
 }
 
-.page-a-body .brief {
-  font-size: 3.6mm;
-  line-height: 1.9;
-  color: #4a3520;
+.section-block {
   margin-bottom: 6mm;
-  padding: 5mm;
-  border-left: 3px solid #c4a35a;
-  background: rgba(196,163,90,0.08);
 }
 
-.page-a-body .brief strong {
+.section-block h3 {
+  font-family: Impact, 'Arial Black', sans-serif;
+  font-size: 3.6mm;
+  color: #6b3a1f;
+  border-bottom: 1px solid #c4b898;
+  padding-bottom: 1.5mm;
+  margin-bottom: 3mm;
+  letter-spacing: 0.05em;
+}
+
+.section-block p {
+  font-size: 3.2mm;
+  line-height: 1.9;
+  color: #4a3520;
+  margin-bottom: 2mm;
+}
+
+.section-block strong {
   color: #6b3a1f;
 }
 
-.page-a-body .mission {
-  font-size: 3.4mm;
-  line-height: 1.8;
-  color: #5a4a32;
-  margin-bottom: 10mm;
+.duty-list {
+  font-size: 3.2mm;
+  line-height: 1.9;
+  color: #4a3520;
+  padding-left: 5mm;
+  margin-bottom: 2mm;
 }
 
-.page-a-body .mission em {
+.duty-list li {
+  margin-bottom: 2.5mm;
+}
+
+.duty-list li strong {
   color: #c44a1a;
-  font-style: normal;
-  font-weight: bold;
+  font-family: Impact, 'Arial Black', sans-serif;
+  font-size: 3.4mm;
+  letter-spacing: 0.03em;
+}
+
+.duty-note {
+  font-size: 2.8mm !important;
+  color: #8b5a1a !important;
+  padding: 3mm !important;
+  background: rgba(196,163,90,0.1) !important;
+  border-left: 3px solid #c4a35a !important;
+  margin-top: 2mm !important;
 }
 
 .qr-section {
@@ -275,27 +301,32 @@ body {
 <!-- ================ A面 ================ -->
 <div class="page-a">
   <div class="page-a-header">
-    <p class="tag">☢ 营地上岗通知 ☢</p>
-    <h1>新门卫报到</h1>
-    <h2>—— 即日起负责营地例行检测 ——</h2>
+    <p class="tag">营地安保处 · 第 042 号通告</p>
+    <h1>门卫上岗知会</h1>
+    <p class="issue-date">签发日：2287 年 7 月 15 日</p>
   </div>
 
   <div class="page-a-body">
-    <div class="brief">
-      <strong>探险队野外任务归来，营地安全由你守关。</strong><br>
-      伪装成人类的"伪人"可能混在队员之中。它们外表与常人无异，却<strong>无法正确使用椅子</strong>——坐姿和椅子会出现违背人体工学原理的怪象。
+    <div class="section-block">
+      <h3>一、关于检测工具</h3>
+      <p>本营地位于旧文明遗址之上。先民遗留了一批被称为"人体工学椅"的奇物——它们依照人类骨骼结构设计，能精准贴合坐骨、腰椎与肩颈曲线。旧文献记载，这种椅子在数千年前曾是办公场所的标配。</p>
+      <p>伪人由异质捏造而成，虽能模仿人类外貌，却<strong>无法理解椅子的逻辑</strong>。它们要么把椅子调得过高导致双脚悬空，要么让坐垫塌陷、扶手异形、靠背断裂——因为异质没有骨骼，自然不知道骨骼需要什么支撑。</p>
+      <p>因此，椅子成了最可靠的检测工具。一个能正确使用椅子的人是可信的；一个坐姿违背人体工学的人，<strong>绝非人类</strong>。</p>
     </div>
 
-    <div class="mission">
-      <p>你的任务：<br>
-      <em>观察 &rarr; 对比 &rarr; 标记 &rarr; 隔离</em></p>
-      <p style="margin-top:2mm;">每位队员都有一张<strong>档案照</strong>（出征前）和一张<strong>实拍</strong>（归来后）。拖动滑块对比两张图，找出椅子异常者，将其标记为伪人。</p>
-      <p style="margin-top:2mm;">判断标准请参阅手册背面的<strong>《新人检测指南》</strong>。</p>
+    <div class="section-block">
+      <h3>二、你的职责</h3>
+      <ol class="duty-list">
+        <li><strong>核验比照</strong>：每位归队队员需出示其档案照。调取其归来后的实拍影像，拖动对比滑块，逐一比对坐姿与椅况。</li>
+        <li><strong>判定异常</strong>：依据本手册背面的《新人检测指南》所列标准，凡出现椅子异常或坐姿违背人体工学原理者，即视为伪人。</li>
+        <li><strong>执行隔离</strong>：将判定为伪人的队员标记后上报。正确识别者将被隔离处理，无辜者不得受牵连。</li>
+      </ol>
+      <p class="duty-note">⚠ 对真人误判将影响你的门卫考评。请谨慎判断，善用本手册提供的知识点。</p>
     </div>
 
     <div class="qr-section">
       <img src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://hardly2333.github.io/fake-human-detection-web-game/" alt="二维码">
-      <p class="qr-label">📱 扫码开始检测</p>
+      <p class="qr-label">📱 扫码进入在线检测</p>
       <p class="qr-sub">或访问 hardly2333.github.io/fake-human-detection-web-game</p>
     </div>
 
