@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>营地门卫手册 — 印刷用</title>
+<style>
+@page { size: A4; margin: 0; }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #fff;
+  font-family: Georgia, 'Times New Roman', 'SimSun', serif;
+  color: #3b2e1e;
+}
+
+.page-a, .page-b {
+  width: 210mm;
+  height: 297mm;
+  margin: 0 auto;
+  padding: 16mm 14mm;
+  background-color: #faf3e6;
+  background-image:
+    radial-gradient(ellipse at 30% 70%, rgba(139,119,90,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(180,140,90,0.04) 0%, transparent 40%);
+  page-break-after: always;
+  position: relative;
+  overflow: hidden;
+}
+
+.page-b { page-break-after: auto; }
+
+@media print {
+  body { background: #fff; }
+  .page-a, .page-b { box-shadow: none; margin: 0; }
+}
+
+/* ===== A面：故事背景 + 引导扫码 ===== */
+
+.page-a-header {
+  text-align: center;
+  border-bottom: 2px solid;
+  border-image: repeating-linear-gradient(-45deg, #c4a35a 0, #c4a35a 3px, #3b2e1e 3px, #3b2e1e 6px) 2;
+  padding-bottom: 10mm;
+  margin-bottom: 8mm;
+}
+
+.page-a-header .tag {
+  font-family: Impact, 'Arial Black', sans-serif;
+  font-size: 3.2mm;
+  color: #8b775a;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.page-a-header h1 {
+  font-family: Impact, 'Arial Black', sans-serif;
+  font-size: 7mm;
+  color: #6b3a1f;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 3mm 0 2mm;
+}
+
+.page-a-header h2 {
+  font-family: 'Courier New', monospace;
+  font-size: 3.8mm;
+  color: #8b5a1a;
+  letter-spacing: 0.1em;
+}
+
+.page-a-body {
+  padding: 0 4mm;
+}
+
+.page-a-body .brief {
+  font-size: 3.6mm;
+  line-height: 1.9;
+  color: #4a3520;
+  margin-bottom: 6mm;
+  padding: 5mm;
+  border-left: 3px solid #c4a35a;
+  background: rgba(196,163,90,0.08);
+}
+
+.page-a-body .brief strong {
+  color: #6b3a1f;
+}
+
+.page-a-body .mission {
+  font-size: 3.4mm;
+  line-height: 1.8;
+  color: #5a4a32;
+  margin-bottom: 10mm;
+}
+
+.page-a-body .mission em {
+  color: #c44a1a;
+  font-style: normal;
+  font-weight: bold;
+}
+
+.qr-section {
+  text-align: center;
+  margin-bottom: 8mm;
+}
+
+.qr-section img {
+  width: 42mm;
+  height: 42mm;
+  border: 2px solid #8b775a;
+  padding: 2mm;
+  background: #fff;
+}
+
+.qr-section .qr-label {
+  font-family: Impact, 'Arial Black', sans-serif;
+  font-size: 3.6mm;
+  color: #6b3a1f;
+  letter-spacing: 0.05em;
+  margin-top: 2mm;
+}
+
+.qr-section .qr-sub {
+  font-size: 3mm;
+  color: #8b775a;
+  margin-top: 1mm;
+}
+
+.page-a-footer {
+  text-align: center;
+  border-top: 1px dashed #c4b898;
+  padding-top: 4mm;
+  font-size: 2.8mm;
+  color: #a09070;
+  position: absolute;
+  bottom: 12mm;
+  left: 14mm;
+  right: 14mm;
+}
+
+/* ===== B面：新人检测指南 ===== */
+
+.page-b-header {
+  text-align: center;
+  border-bottom: 2px solid #8b775a;
+  padding-bottom: 6mm;
+  margin-bottom: 8mm;
+}
+
+.page-b-header h1 {
+  font-family: Impact, 'Arial Black', sans-serif;
+  font-size: 6mm;
+  color: #6b3a1f;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.page-b-header .sub {
+  font-size: 3.2mm;
+  color: #8b775a;
+  margin-top: 1.5mm;
+  font-style: italic;
+}
+
+.guide-section {
+  margin-bottom: 6mm;
+}
+
+.guide-section h3 {
+  font-family: Impact, 'Arial Black', sans-serif;
+  font-size: 3.8mm;
+  color: #6b3a1f;
+  border-bottom: 1px solid #c4b898;
+  padding-bottom: 1.5mm;
+  margin-bottom: 3mm;
+  letter-spacing: 0.04em;
+}
+
+.ninety-grid {
+  display: flex;
+  gap: 3mm;
+  flex-wrap: wrap;
+}
+
+.ninety-card {
+  flex: 1 1 28%;
+  min-width: 45mm;
+  background: rgba(196,163,90,0.08);
+  border: 1px solid #c4b898;
+  border-radius: 2px;
+  padding: 3mm;
+  text-align: center;
+}
+
+.ninety-card .num {
+  font-family: Impact, 'Arial Black', sans-serif;
+  font-size: 5mm;
+  color: #c44a1a;
+}
+
+.ninety-card .num-label {
+  font-size: 2.6mm;
+  color: #8b775a;
+  letter-spacing: 0.05em;
+  margin-bottom: 2mm;
+}
+
+.ninety-card .desc {
+  font-size: 2.8mm;
+  color: #4a3520;
+  line-height: 1.5;
+}
+
+.check-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 2.8mm;
+  line-height: 1.6;
+}
+
+.check-table th {
+  font-family: Impact, 'Arial Black', sans-serif;
+  background: #6b3a1f;
+  color: #faf3e6;
+  padding: 2mm 3mm;
+  text-align: left;
+  font-size: 2.8mm;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.check-table td {
+  padding: 2mm 3mm;
+  border-bottom: 1px dotted #c4b898;
+  vertical-align: top;
+}
+
+.check-table tr:nth-child(even) td {
+  background: rgba(196,163,90,0.04);
+}
+
+.check-table .ok { color: #2d7a2d; font-weight: bold; }
+.check-table .warn { color: #c44a1a; font-weight: bold; }
+
+.note-box {
+  background: rgba(196,163,90,0.08);
+  border: 1px solid #c4a35a;
+  border-radius: 2px;
+  padding: 3mm 4mm;
+  font-size: 2.8mm;
+  line-height: 1.7;
+  color: #5a4a32;
+}
+
+.note-box strong {
+  color: #6b3a1f;
+}
+
+.page-b-footer {
+  text-align: center;
+  border-top: 1px dashed #c4b898;
+  padding-top: 3mm;
+  font-size: 2.6mm;
+  color: #a09070;
+  position: absolute;
+  bottom: 10mm;
+  left: 14mm;
+  right: 14mm;
+}
+</style>
+</head>
+<body>
+
+<!-- ================ A面 ================ -->
+<div class="page-a">
+  <div class="page-a-header">
+    <p class="tag">☢ 营地上岗通知 ☢</p>
+    <h1>新门卫报到</h1>
+    <h2>—— 即日起负责营地例行检测 ——</h2>
+  </div>
+
+  <div class="page-a-body">
+    <div class="brief">
+      <strong>探险队野外任务归来，营地安全由你守关。</strong><br>
+      伪装成人类的"伪人"可能混在队员之中。它们外表与常人无异，却<strong>无法正确使用椅子</strong>——坐姿和椅子会出现违背人体工学原理的怪象。
+    </div>
+
+    <div class="mission">
+      <p>你的任务：<br>
+      <em>观察 &rarr; 对比 &rarr; 标记 &rarr; 隔离</em></p>
+      <p style="margin-top:2mm;">每位队员都有一张<strong>档案照</strong>（出征前）和一张<strong>实拍</strong>（归来后）。拖动滑块对比两张图，找出椅子异常者，将其标记为伪人。</p>
+      <p style="margin-top:2mm;">判断标准请参阅手册背面的<strong>《新人检测指南》</strong>。</p>
+    </div>
+
+    <div class="qr-section">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://hardly2333.github.io/fake-human-detection-web-game/" alt="二维码">
+      <p class="qr-label">📱 扫码开始检测</p>
+      <p class="qr-sub">或访问 hardly2333.github.io/fake-human-detection-web-game</p>
+    </div>
+
+    <div class="page-a-footer">
+      本手册仅供营地内部使用 · 请勿外传
+    </div>
+  </div>
+</div>
+
+<!-- ================ B面 ================ -->
+<div class="page-b">
+  <div class="page-b-header">
+    <h1>新人检测指南</h1>
+    <p class="sub">—— 人体工学椅异常识别手册 ——</p>
+  </div>
+
+  <div class="guide-section">
+    <h3>合格坐姿 · 三个 90° 原则</h3>
+    <div class="ninety-grid">
+      <div class="ninety-card">
+        <div class="num">90°</div>
+        <div class="num-label">躯干与大腿</div>
+        <div class="desc">臀坐最深处，腰部紧贴椅背，不前倾不下滑</div>
+      </div>
+      <div class="ninety-card">
+        <div class="num">90°</div>
+        <div class="num-label">膝关节</div>
+        <div class="desc">双脚平稳触地，大腿平行地面，不悬空不垫脚</div>
+      </div>
+      <div class="ninety-card">
+        <div class="num">90°</div>
+        <div class="num-label">肘关节</div>
+        <div class="desc">双肩自然下沉，前臂平放扶手，不耸肩不悬臂</div>
+      </div>
+    </div>
+    <p style="font-size:2.6mm;color:#8b775a;margin-top:2mm;text-align:center;">+ 显示器顶端与视线平行，不低头不仰头</p>
+  </div>
+
+  <div class="guide-section">
+    <h3>椅子结构速查</h3>
+    <table class="check-table">
+      <tr><th style="width:22%;">部件</th><th style="width:28%;">合格标志</th><th style="width:50%;">异常警报</th></tr>
+      <tr>
+        <td>坐垫</td>
+        <td class="ok">平整、有弹性</td>
+        <td class="warn">塌陷、破洞 → 劣质网布或海绵失效，无法承托体重</td>
+      </tr>
+      <tr>
+        <td>靠背</td>
+        <td class="ok">稳固、贴合腰部</td>
+        <td class="warn">断裂后倒 → 腰部悬空无支撑，极易导致腰椎损伤</td>
+      </tr>
+      <tr>
+        <td>扶手</td>
+        <td class="ok">与肘齐平、正常形态</td>
+        <td class="warn">过高/过低/缺失/变形 → 导致耸肩或手臂悬空</td>
+      </tr>
+      <tr>
+        <td>椅腿</td>
+        <td class="ok">四脚平稳着地</td>
+        <td class="warn">扭曲、不稳 → 底盘损坏，有倾覆风险</td>
+      </tr>
+      <tr>
+        <td>气压棒</td>
+        <td class="ok">无裂纹、无异响</td>
+        <td class="warn">裂纹、漏气 → 极度危险！须立即隔离</td>
+      </tr>
+      <tr>
+        <td>头枕</td>
+        <td class="ok">正面朝向、支撑后脑</td>
+        <td class="warn">反装、缺失 → 导致脖子后仰，颈椎受压</td>
+      </tr>
+      <tr>
+        <td>整体高度</td>
+        <td class="ok">双脚着地、大腿平行</td>
+        <td class="warn">过高 → 双脚悬空，压迫大腿神经</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="guide-section">
+    <h3>安全认证标志</h3>
+    <div class="note-box">
+      <strong>合格气压棒认证：</strong>SGS &nbsp;·&nbsp; TUV &nbsp;·&nbsp; BIFMA<br>
+      <strong>安全级别：</strong>Class 3 或 Class 4 以上<br>
+      <strong>选购参考：</strong>大体重（≥80kg）选高密度海绵 / 高弹力网布；小个子注意最低坐高<br>
+      <strong>试坐重点：</strong>腰部是否悬空？大腿是否受压？肩膀是否自然下沉？
+    </div>
+  </div>
+
+  <div class="page-b-footer">
+    记住：没有任何坐姿适合保持一整天 · 每隔 45-60 分钟起来活动
+  </div>
+</div>
+
+</body>
+</html>
