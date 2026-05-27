@@ -35,132 +35,93 @@ body {
   .page-a, .page-b { box-shadow: none; margin: 0; }
 }
 
-/* ===== A面：故事背景 + 引导扫码 ===== */
+/* ===== A面：海报式引导 ===== */
 
-.page-a-header {
+.poster-hook {
   text-align: center;
-  border-bottom: 2px solid;
-  border-image: repeating-linear-gradient(-45deg, #c4a35a 0, #c4a35a 3px, #3b2e1e 3px, #3b2e1e 6px) 2;
-  padding-bottom: 10mm;
-  margin-bottom: 8mm;
+  padding: 18mm 4mm 12mm;
 }
 
-.page-a-header .tag {
-  font-family: 'Courier New', monospace;
-  font-size: 3mm;
-  color: #8b775a;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-
-.page-a-header h1 {
+.poster-hook .hook-line {
   font-family: Impact, 'Arial Black', sans-serif;
-  font-size: 8mm;
+  font-size: 14mm;
   color: #6b3a1f;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  margin: 2mm 0 2mm;
+  line-height: 1.1;
+  margin-bottom: 5mm;
+  text-shadow: 2px 2px 0 rgba(180, 140, 90, 0.3);
 }
 
-.page-a-header .issue-date {
-  font-family: 'Courier New', monospace;
-  font-size: 3mm;
-  color: #8b775a;
+.poster-hook .hook-sub {
+  font-family: 'SimHei', 'Heiti SC', 'SimSun', serif;
+  font-size: 5mm;
+  color: #8b5a1a;
   letter-spacing: 0.08em;
 }
 
-.page-a-body {
-  padding: 0 4mm;
+.poster-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2mm;
+  padding: 4mm 4mm 10mm;
+  flex-wrap: wrap;
 }
 
-.section-block {
-  margin-bottom: 6mm;
+.step-item {
+  text-align: center;
+  width: 28mm;
 }
 
-.section-block h3 {
-  font-family: Impact, 'Arial Black', sans-serif;
-  font-size: 3.6mm;
-  color: #6b3a1f;
-  border-bottom: 1px solid #c4b898;
-  padding-bottom: 1.5mm;
-  margin-bottom: 3mm;
-  letter-spacing: 0.05em;
-}
-
-.section-block p {
-  font-size: 3.2mm;
-  line-height: 1.9;
-  color: #4a3520;
+.step-icon {
+  font-size: 12mm;
+  line-height: 1;
   margin-bottom: 2mm;
 }
 
-.section-block strong {
-  color: #6b3a1f;
-}
-
-.duty-list {
-  font-size: 3.2mm;
-  line-height: 1.9;
-  color: #4a3520;
-  padding-left: 5mm;
-  margin-bottom: 2mm;
-}
-
-.duty-list li {
-  margin-bottom: 2.5mm;
-}
-
-.duty-list li strong {
-  color: #c44a1a;
+.step-label {
   font-family: Impact, 'Arial Black', sans-serif;
-  font-size: 3.4mm;
-  letter-spacing: 0.03em;
+  font-size: 4.5mm;
+  color: #6b3a1f;
+  letter-spacing: 0.08em;
 }
 
-.duty-note {
-  font-size: 2.8mm !important;
-  color: #8b5a1a !important;
-  padding: 3mm !important;
-  background: rgba(196,163,90,0.1) !important;
-  border-left: 3px solid #c4a35a !important;
-  margin-top: 2mm !important;
+.step-arrow {
+  font-size: 6mm;
+  color: #c4a35a;
 }
 
 .qr-section {
   text-align: center;
-  margin-bottom: 8mm;
+  padding: 4mm 0 0;
 }
 
 .qr-section img {
-  width: 42mm;
-  height: 42mm;
-  border: 2px solid #8b775a;
+  width: 48mm;
+  height: 48mm;
+  border: 3px solid #8b775a;
   padding: 2mm;
   background: #fff;
 }
 
 .qr-section .qr-label {
-  font-family: Impact, 'Arial Black', sans-serif;
-  font-size: 3.6mm;
+  font-family: 'SimHei', 'Heiti SC', 'SimSun', serif;
+  font-size: 4mm;
   color: #6b3a1f;
   letter-spacing: 0.05em;
-  margin-top: 2mm;
-}
-
-.qr-section .qr-sub {
-  font-size: 3mm;
-  color: #8b775a;
-  margin-top: 1mm;
+  margin-top: 3mm;
+  font-weight: bold;
 }
 
 .page-a-footer {
   text-align: center;
   border-top: 1px dashed #c4b898;
   padding-top: 4mm;
-  font-size: 2.8mm;
+  font-size: 2.6mm;
   color: #a09070;
   position: absolute;
-  bottom: 12mm;
+  bottom: 10mm;
   left: 14mm;
   right: 14mm;
 }
@@ -300,39 +261,40 @@ body {
 
 <!-- ================ A面 ================ -->
 <div class="page-a">
-  <div class="page-a-header">
-    <p class="tag">营地安保处 · 第 042 号通告</p>
-    <h1>门卫上岗知会</h1>
-    <p class="issue-date">签发日：2287 年 7 月 15 日</p>
+  <div class="poster-hook">
+    <p class="hook-line">它们就在队伍里</p>
+    <p class="hook-sub">一张椅子就能让伪人现出原形</p>
   </div>
 
-  <div class="page-a-body">
-    <div class="section-block">
-      <h3>一、关于检测工具</h3>
-      <p>本营地位于旧文明遗址之上。先民遗留了一批被称为"人体工学椅"的奇物——它们依照人类骨骼结构设计，能精准贴合坐骨、腰椎与肩颈曲线。旧文献记载，这种椅子在数千年前曾是办公场所的标配。</p>
-      <p>伪人由异质捏造而成，虽能模仿人类外貌，却<strong>无法理解椅子的逻辑</strong>。它们要么把椅子调得过高导致双脚悬空，要么让坐垫塌陷、扶手异形、靠背断裂——因为异质没有骨骼，自然不知道骨骼需要什么支撑。</p>
-      <p>因此，椅子成了最可靠的检测工具。一个能正确使用椅子的人是可信的；一个坐姿违背人体工学的人，<strong>绝非人类</strong>。</p>
+  <div class="poster-steps">
+    <div class="step-item">
+      <div class="step-icon">📷</div>
+      <div class="step-label">辨认</div>
     </div>
+    <div class="step-arrow">→</div>
+    <div class="step-item">
+      <div class="step-icon">🔄</div>
+      <div class="step-label">比照</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="step-item">
+      <div class="step-icon">👁</div>
+      <div class="step-label">辨伪</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="step-item">
+      <div class="step-icon">☑</div>
+      <div class="step-label">标记</div>
+    </div>
+  </div>
 
-    <div class="section-block">
-      <h3>二、你的职责</h3>
-      <ol class="duty-list">
-        <li><strong>核验比照</strong>：每位归队队员需出示其档案照。调取其归来后的实拍影像，拖动对比滑块，逐一比对坐姿与椅况。</li>
-        <li><strong>判定异常</strong>：依据本手册背面的《新人检测指南》所列标准，凡出现椅子异常或坐姿违背人体工学原理者，即视为伪人。</li>
-        <li><strong>执行隔离</strong>：将判定为伪人的队员标记后上报。正确识别者将被隔离处理，无辜者不得受牵连。</li>
-      </ol>
-      <p class="duty-note">⚠ 对真人误判将影响你的门卫考评。请谨慎判断，善用本手册提供的知识点。</p>
-    </div>
+  <div class="qr-section">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://hardly2333.github.io/fake-human-detection-web-game/" alt="二维码">
+    <p class="qr-label">📱 扫码，亮出你的判断</p>
+  </div>
 
-    <div class="qr-section">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://hardly2333.github.io/fake-human-detection-web-game/" alt="二维码">
-      <p class="qr-label">📱 扫码进入在线检测</p>
-      <p class="qr-sub">或访问 hardly2333.github.io/fake-human-detection-web-game</p>
-    </div>
-
-    <div class="page-a-footer">
-      本手册仅供营地内部使用 · 请勿外传
-    </div>
+  <div class="page-a-footer">
+    本手册仅供营地内部使用 · 请勿外传
   </div>
 </div>
 
