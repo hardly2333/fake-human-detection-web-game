@@ -35,61 +35,84 @@ body {
   .page-a, .page-b { box-shadow: none; margin: 0; }
 }
 
-/* ===== A面：海报式引导 ===== */
+/* ===== A面：门卫入职告知 ===== */
 
-.poster-hook {
+.page-a-header {
   text-align: center;
-  padding: 18mm 4mm 12mm;
+  border-bottom: 2px solid;
+  border-image: repeating-linear-gradient(-45deg, #c4a35a 0, #c4a35a 3px, #3b2e1e 3px, #3b2e1e 6px) 2;
+  padding-bottom: 10mm;
+  margin-bottom: 8mm;
 }
 
-.poster-hook .hook-line {
-  font-family: Impact, 'Arial Black', sans-serif;
-  font-size: 14mm;
-  color: #6b3a1f;
-  letter-spacing: 0.06em;
+.page-a-header .tag {
+  font-family: 'Courier New', monospace;
+  font-size: 3mm;
+  color: #8b775a;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  line-height: 1.1;
-  margin-bottom: 5mm;
-  text-shadow: 2px 2px 0 rgba(180, 140, 90, 0.3);
 }
 
-.poster-hook .hook-sub {
-  font-family: 'SimHei', 'Heiti SC', 'SimSun', serif;
-  font-size: 5mm;
-  color: #8b5a1a;
+.page-a-header h1 {
+  font-family: Impact, 'Arial Black', sans-serif;
+  font-size: 8mm;
+  color: #6b3a1f;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin: 2mm 0 2mm;
+}
+
+.page-a-header .issue-date {
+  font-family: 'Courier New', monospace;
+  font-size: 3mm;
+  color: #8b775a;
   letter-spacing: 0.08em;
 }
 
-.poster-steps {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2mm;
-  padding: 4mm 4mm 10mm;
-  flex-wrap: wrap;
-}
-
-.step-item {
+.welcome {
+  font-size: 3.4mm;
+  line-height: 1.9;
+  color: #5a3a1f;
   text-align: center;
-  width: 28mm;
+  padding: 4mm 3mm 3mm;
+  margin-bottom: 6mm;
+  border-bottom: 1px dashed #c4b898;
 }
 
-.step-icon {
-  font-size: 12mm;
-  line-height: 1;
+.welcome p:first-child {
+  font-weight: bold;
+  font-family: 'SimHei', 'Heiti SC', serif;
   margin-bottom: 2mm;
 }
 
-.step-label {
-  font-family: Impact, 'Arial Black', sans-serif;
-  font-size: 4.5mm;
-  color: #6b3a1f;
-  letter-spacing: 0.08em;
+.welcome p:last-child {
+  color: #8b775a;
+  font-style: italic;
 }
 
-.step-arrow {
-  font-size: 6mm;
-  color: #c4a35a;
+.section-block {
+  margin-bottom: 6mm;
+}
+
+.section-block h3 {
+  font-family: Impact, 'Arial Black', sans-serif;
+  font-size: 3.6mm;
+  color: #6b3a1f;
+  border-bottom: 1px solid #c4b898;
+  padding-bottom: 1.5mm;
+  margin-bottom: 3mm;
+  letter-spacing: 0.05em;
+}
+
+.section-block p {
+  font-size: 3.2mm;
+  line-height: 1.9;
+  color: #4a3520;
+  margin-bottom: 2mm;
+}
+
+.section-block strong {
+  color: #6b3a1f;
 }
 
 .qr-section {
@@ -126,18 +149,18 @@ body {
   right: 14mm;
 }
 
-/* ===== B面：新人检测指南 ===== */
+/* ===== B面：正确坐姿 ===== */
 
 .page-b-header {
   text-align: center;
   border-bottom: 2px solid #8b775a;
   padding-bottom: 6mm;
-  margin-bottom: 8mm;
+  margin-bottom: 10mm;
 }
 
 .page-b-header h1 {
   font-family: Impact, 'Arial Black', sans-serif;
-  font-size: 6mm;
+  font-size: 7mm;
   color: #6b3a1f;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -150,98 +173,32 @@ body {
   font-style: italic;
 }
 
-.guide-section {
-  margin-bottom: 6mm;
-}
-
-.guide-section h3 {
-  font-family: Impact, 'Arial Black', sans-serif;
-  font-size: 3.8mm;
-  color: #6b3a1f;
-  border-bottom: 1px solid #c4b898;
-  padding-bottom: 1.5mm;
-  margin-bottom: 3mm;
-  letter-spacing: 0.04em;
-}
-
-.ninety-grid {
+.page-b-image {
+  flex: 1;
   display: flex;
-  gap: 3mm;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  padding: 4mm 0 0;
 }
 
-.ninety-card {
-  flex: 1 1 28%;
-  min-width: 45mm;
-  background: rgba(196,163,90,0.08);
-  border: 1px solid #c4b898;
-  border-radius: 2px;
-  padding: 3mm;
-  text-align: center;
+.page-b-image img {
+  max-width: 85%;
+  max-height: 160mm;
+  width: auto;
+  height: auto;
+  display: block;
+  border: 3px solid #8b775a;
+  border-radius: 3px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
 }
 
-.ninety-card .num {
-  font-family: Impact, 'Arial Black', sans-serif;
-  font-size: 5mm;
-  color: #c44a1a;
-}
-
-.ninety-card .num-label {
-  font-size: 2.6mm;
-  color: #8b775a;
-  letter-spacing: 0.05em;
-  margin-bottom: 2mm;
-}
-
-.ninety-card .desc {
-  font-size: 2.8mm;
-  color: #4a3520;
-  line-height: 1.5;
-}
-
-.check-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 2.8mm;
-  line-height: 1.6;
-}
-
-.check-table th {
-  font-family: Impact, 'Arial Black', sans-serif;
-  background: #6b3a1f;
-  color: #faf3e6;
-  padding: 2mm 3mm;
-  text-align: left;
-  font-size: 2.8mm;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.check-table td {
-  padding: 2mm 3mm;
-  border-bottom: 1px dotted #c4b898;
-  vertical-align: top;
-}
-
-.check-table tr:nth-child(even) td {
-  background: rgba(196,163,90,0.04);
-}
-
-.check-table .ok { color: #2d7a2d; font-weight: bold; }
-.check-table .warn { color: #c44a1a; font-weight: bold; }
-
-.note-box {
-  background: rgba(196,163,90,0.08);
-  border: 1px solid #c4a35a;
-  border-radius: 2px;
-  padding: 3mm 4mm;
-  font-size: 2.8mm;
-  line-height: 1.7;
-  color: #5a4a32;
-}
-
-.note-box strong {
+.page-b-image .hint {
+  font-family: 'SimHei', 'Heiti SC', 'SimSun', serif;
+  font-size: 4mm;
   color: #6b3a1f;
+  margin-top: 6mm;
+  font-weight: bold;
+  letter-spacing: 0.06em;
 }
 
 .page-b-footer {
@@ -261,36 +218,27 @@ body {
 
 <!-- ================ A面 ================ -->
 <div class="page-a">
-  <div class="poster-hook">
-    <p class="hook-line">它们就在队伍里</p>
-    <p class="hook-sub">一张椅子就能让伪人现出原形</p>
+  <div class="page-a-header">
+    <p class="tag">营地安保处 · 第 042 号通告</p>
+    <h1>门卫上岗知会</h1>
+    <p class="issue-date">签发日：2287 年 7 月 15 日</p>
   </div>
 
-  <div class="poster-steps">
-    <div class="step-item">
-      <div class="step-icon">📷</div>
-      <div class="step-label">辨认</div>
-    </div>
-    <div class="step-arrow">→</div>
-    <div class="step-item">
-      <div class="step-icon">🔄</div>
-      <div class="step-label">比照</div>
-    </div>
-    <div class="step-arrow">→</div>
-    <div class="step-item">
-      <div class="step-icon">👁</div>
-      <div class="step-label">辨伪</div>
-    </div>
-    <div class="step-arrow">→</div>
-    <div class="step-item">
-      <div class="step-icon">☑</div>
-      <div class="step-label">标记</div>
-    </div>
+  <div class="welcome">
+    <p>欢迎你，新任门卫。营地全体队员已将身家性命托付于你。</p>
+    <p>请仔细阅读本手册，牢记检测标准，秉公执守——营地安全，始于你的每一次判断。</p>
+  </div>
+
+  <div class="section-block">
+    <h3>关于检测工具</h3>
+    <p>本营地位于旧文明遗址之上。先民遗留了一批被称为"人体工学椅"的奇物——它们依照人类骨骼结构设计，能精准贴合坐骨、腰椎与肩颈曲线。旧文献记载，这种椅子在数千年前曾是办公场所的标配。</p>
+    <p>伪人由异质捏造而成，虽能模仿人类外貌，却<strong>无法理解椅子的逻辑</strong>。它们要么把椅子调得过高导致双脚悬空，要么让坐垫塌陷、扶手异形、靠背断裂——因为异质没有骨骼，自然不知道骨骼需要什么支撑。</p>
+    <p>因此，椅子成了最可靠的检测工具。一个能正确使用椅子的人是可信的；一个坐姿违背人体工学的人，<strong>绝非人类</strong>。</p>
   </div>
 
   <div class="qr-section">
     <img src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://hardly2333.github.io/fake-human-detection-web-game/" alt="二维码">
-    <p class="qr-label">📱 扫码，亮出你的判断</p>
+    <p class="qr-label">📱 扫码开始检测</p>
   </div>
 
   <div class="page-a-footer">
@@ -301,86 +249,17 @@ body {
 <!-- ================ B面 ================ -->
 <div class="page-b">
   <div class="page-b-header">
-    <h1>新人检测指南</h1>
-    <p class="sub">—— 人体工学椅异常识别手册 ——</p>
+    <h1>新人须知</h1>
+    <p class="sub">—— 这或许会很有用 ——</p>
   </div>
 
-  <div class="guide-section">
-    <h3>合格坐姿 · 三个 90° 原则</h3>
-    <div class="ninety-grid">
-      <div class="ninety-card">
-        <div class="num">90°</div>
-        <div class="num-label">躯干与大腿</div>
-        <div class="desc">臀坐最深处，腰部紧贴椅背，不前倾不下滑</div>
-      </div>
-      <div class="ninety-card">
-        <div class="num">90°</div>
-        <div class="num-label">膝关节</div>
-        <div class="desc">双脚平稳触地，大腿平行地面，不悬空不垫脚</div>
-      </div>
-      <div class="ninety-card">
-        <div class="num">90°</div>
-        <div class="num-label">肘关节</div>
-        <div class="desc">双肩自然下沉，前臂平放扶手，不耸肩不悬臂</div>
-      </div>
-    </div>
-    <p style="font-size:2.6mm;color:#8b775a;margin-top:2mm;text-align:center;">+ 显示器顶端与视线平行，不低头不仰头</p>
-  </div>
-
-  <div class="guide-section">
-    <h3>椅子结构速查</h3>
-    <table class="check-table">
-      <tr><th style="width:22%;">部件</th><th style="width:28%;">合格标志</th><th style="width:50%;">异常警报</th></tr>
-      <tr>
-        <td>坐垫</td>
-        <td class="ok">平整、有弹性</td>
-        <td class="warn">塌陷、破洞 → 劣质网布或海绵失效，无法承托体重</td>
-      </tr>
-      <tr>
-        <td>靠背</td>
-        <td class="ok">稳固、贴合腰部</td>
-        <td class="warn">断裂后倒 → 腰部悬空无支撑，极易导致腰椎损伤</td>
-      </tr>
-      <tr>
-        <td>扶手</td>
-        <td class="ok">与肘齐平、正常形态</td>
-        <td class="warn">过高/过低/缺失/变形 → 导致耸肩或手臂悬空</td>
-      </tr>
-      <tr>
-        <td>椅腿</td>
-        <td class="ok">四脚平稳着地</td>
-        <td class="warn">扭曲、不稳 → 底盘损坏，有倾覆风险</td>
-      </tr>
-      <tr>
-        <td>气压棒</td>
-        <td class="ok">无裂纹、无异响</td>
-        <td class="warn">裂纹、漏气 → 极度危险！须立即隔离</td>
-      </tr>
-      <tr>
-        <td>头枕</td>
-        <td class="ok">正面朝向、支撑后脑</td>
-        <td class="warn">反装、缺失 → 导致脖子后仰，颈椎受压</td>
-      </tr>
-      <tr>
-        <td>整体高度</td>
-        <td class="ok">双脚着地、大腿平行</td>
-        <td class="warn">过高 → 双脚悬空，压迫大腿神经</td>
-      </tr>
-    </table>
-  </div>
-
-  <div class="guide-section">
-    <h3>安全认证标志</h3>
-    <div class="note-box">
-      <strong>合格气压棒认证：</strong>SGS &nbsp;·&nbsp; TUV &nbsp;·&nbsp; BIFMA<br>
-      <strong>安全级别：</strong>Class 3 或 Class 4 以上<br>
-      <strong>选购参考：</strong>大体重（≥80kg）选高密度海绵 / 高弹力网布；小个子注意最低坐高<br>
-      <strong>试坐重点：</strong>腰部是否悬空？大腿是否受压？肩膀是否自然下沉？
-    </div>
+  <div class="page-b-image">
+    <img src="figs/posture_guide.webp" alt="正确坐姿示意图">
+    <p class="hint">这或许会很有用</p>
   </div>
 
   <div class="page-b-footer">
-    记住：没有任何坐姿适合保持一整天 · 每隔 45-60 分钟起来活动
+    本手册仅供营地内部使用 · 请勿外传
   </div>
 </div>
 
