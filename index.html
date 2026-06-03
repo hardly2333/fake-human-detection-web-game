@@ -55,6 +55,21 @@ body {
   box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
 }
 
+.rules {
+  font-size: clamp(0.8rem, 2.5vw, 0.88rem);
+  color: #4a3520;
+  line-height: 1.8;
+  padding: 0 2px clamp(10px, 3vw, 16px);
+  border-bottom: 1px dashed #c4b898;
+  margin-bottom: clamp(10px, 3vw, 16px);
+}
+
+.rules strong {
+  color: #c44a1a;
+  font-family: Impact, 'Arial Black', sans-serif;
+  letter-spacing: 0.04em;
+}
+
 .overview {
   margin-bottom: clamp(14px, 4vw, 22px);
 }
@@ -536,6 +551,10 @@ body {
 
 <div class="story">
   探险队野外任务归来，营地门卫须在"例行检测"中找出伪装成人类的"伪人"。伪人外表与常人无异，却无法正确使用椅子——它们的坐姿和椅子会出现违背人体工学原理的怪异现象。根据人体工学知识判断：合格坐姿者放行，异常者隔离。拖动滑块对比每位队员的"档案照"与"实拍"，找出伪人。
+</div>
+
+<div class="rules">
+  <strong>游戏规则：</strong>左侧「档案照」为出征前留档，右侧「实拍」为归来后影像。拖动滑块对比同一人的坐姿与椅子状态，发现异常者勾选「标记为伪人」并提交。伪人共有 4 名，找到越多得分越高——但误判真人会影响你的门卫考评。
 </div>
 
 <div class="overview">
