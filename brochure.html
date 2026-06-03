@@ -35,7 +35,7 @@ body {
   .page-a, .page-b { box-shadow: none; margin: 0; }
 }
 
-/* ===== A面：海报式引导 ===== */
+/* ===== A面 ===== */
 
 .poster-hook {
   text-align: center;
@@ -94,12 +94,12 @@ body {
 
 .qr-section {
   text-align: center;
-  padding: 6mm 0 0;
+  padding: 16mm 0 0;
 }
 
 .qr-section img {
-  width: 64mm;
-  height: 64mm;
+  width: 72mm;
+  height: 72mm;
   border: 4px solid #8b775a;
   padding: 2mm;
   background: #fff;
@@ -110,7 +110,7 @@ body {
   font-size: 5mm;
   color: #6b3a1f;
   letter-spacing: 0.05em;
-  margin-top: 4mm;
+  margin-top: 5mm;
   font-weight: bold;
 }
 
@@ -126,13 +126,13 @@ body {
   right: 12mm;
 }
 
-/* ===== B面：图文坐姿指南 ===== */
+/* ===== B面 ===== */
 
 .page-b-header {
   text-align: center;
   border-bottom: 2px solid #8b775a;
-  padding-bottom: 5mm;
-  margin-bottom: 8mm;
+  padding-bottom: 4mm;
+  margin-bottom: 6mm;
 }
 
 .page-b-header h1 {
@@ -150,73 +150,58 @@ body {
   font-style: italic;
 }
 
-.posture-layout {
-  display: flex;
-  gap: 6mm;
-  align-items: flex-start;
-  padding: 0 2mm;
-}
-
 .posture-image {
-  flex: 0 0 48%;
+  text-align: center;
+  margin-bottom: 6mm;
 }
 
 .posture-image img {
-  width: 100%;
+  max-width: 100%;
+  max-height: 110mm;
+  width: auto;
   height: auto;
   display: block;
+  margin: 0 auto;
   border: 3px solid #8b775a;
   border-radius: 3px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.12);
 }
 
-.posture-principles {
+.principles-row {
+  display: flex;
+  justify-content: center;
+  gap: 4mm;
+}
+
+.principle-card {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 10mm;
-  padding-top: 4mm;
+  max-width: 55mm;
+  text-align: center;
+  background: rgba(196,163,90,0.06);
+  border: 1px solid #c4b898;
+  border-radius: 2px;
+  padding: 4mm 3mm;
 }
 
-.principle {
-  display: flex;
-  align-items: flex-start;
-  gap: 5mm;
-}
-
-.principle-num {
+.principle-card .num {
   font-family: Impact, 'Arial Black', sans-serif;
-  font-size: 10mm;
+  font-size: 12mm;
   color: #c44a1a;
   line-height: 1;
-  flex-shrink: 0;
-  width: 16mm;
-  text-align: center;
 }
 
-.principle-content strong {
+.principle-card .title {
   font-family: Impact, 'Arial Black', sans-serif;
   font-size: 4.5mm;
   color: #6b3a1f;
   letter-spacing: 0.04em;
-  display: block;
-  margin-bottom: 1.5mm;
+  margin: 2mm 0 2mm;
 }
 
-.principle-content p {
-  font-size: 3.4mm;
-  line-height: 1.7;
+.principle-card .desc {
+  font-size: 3.2mm;
+  line-height: 1.6;
   color: #5a4a32;
-}
-
-.posture-note {
-  text-align: center;
-  font-size: 3.6mm;
-  color: #8b775a;
-  padding: 8mm 0 4mm;
-  border-bottom: 1px dashed #c4b898;
-  margin-bottom: 4mm;
-  font-style: italic;
 }
 
 .page-b-footer {
@@ -280,36 +265,27 @@ body {
     <p class="sub">—— 人体工学椅异常识别手册 ——</p>
   </div>
 
-  <div class="posture-layout">
-    <div class="posture-image">
-      <img src="figs/posture_guide.webp" alt="正确坐姿示意图">
-    </div>
-    <div class="posture-principles">
-      <div class="principle">
-        <div class="principle-num">90°</div>
-        <div class="principle-content">
-          <strong>躯干与大腿</strong>
-          <p>臀坐最深处，腰部紧贴椅背，不前倾不下滑</p>
-        </div>
-      </div>
-      <div class="principle">
-        <div class="principle-num">90°</div>
-        <div class="principle-content">
-          <strong>膝关节</strong>
-          <p>双脚平稳触地，大腿平行地面，不悬空不垫脚</p>
-        </div>
-      </div>
-      <div class="principle">
-        <div class="principle-num">90°</div>
-        <div class="principle-content">
-          <strong>肘关节</strong>
-          <p>双肩自然下沉，前臂平放扶手，不耸肩不悬臂</p>
-        </div>
-      </div>
-    </div>
+  <div class="posture-image">
+    <img src="figs/posture_guide.webp" alt="正确坐姿示意图">
   </div>
 
-  <p class="posture-note">+ 显示器顶端与视线平行，不低头不仰头</p>
+  <div class="principles-row">
+    <div class="principle-card">
+      <div class="num">90°</div>
+      <div class="title">躯干与大腿</div>
+      <div class="desc">臀坐最深处，腰部紧贴椅背，不前倾不下滑</div>
+    </div>
+    <div class="principle-card">
+      <div class="num">90°</div>
+      <div class="title">膝关节</div>
+      <div class="desc">双脚平稳触地，大腿平行地面，不悬空不垫脚</div>
+    </div>
+    <div class="principle-card">
+      <div class="num">90°</div>
+      <div class="title">肘关节</div>
+      <div class="desc">双肩自然下沉，前臂平放扶手，不耸肩不悬臂</div>
+    </div>
+  </div>
 
   <div class="page-b-footer">
     记住：没有任何坐姿适合保持一整天 · 每隔 45-60 分钟起来活动
