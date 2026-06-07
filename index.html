@@ -18,7 +18,7 @@ body {
   width: 100%;
   max-width: 480px;
   margin: 0 auto;
-  padding: 0 clamp(8px, 3vw, 20px);
+  padding: 0 clamp(8px, 3vw, 20px) calc(92px + env(safe-area-inset-bottom));
   min-height: 100vh;
 }
 
@@ -50,13 +50,13 @@ body {
   border-radius: 4px;
   padding: clamp(10px, 3vw, 16px);
   margin-bottom: clamp(12px, 3vw, 20px);
-  font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+  font-size: clamp(0.875rem, 2.8vw, 0.95rem);
   color: #5a4a32;
   box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
 }
 
 .rules {
-  font-size: clamp(0.8rem, 2.5vw, 0.88rem);
+  font-size: clamp(0.875rem, 2.8vw, 0.95rem);
   color: #4a3520;
   line-height: 1.8;
   padding: 0 2px clamp(10px, 3vw, 16px);
@@ -81,6 +81,7 @@ body {
 }
 
 .member-card {
+  position: relative;
   background: #faf3e6;
   border: 2px solid #8b775a;
   border-radius: 4px;
@@ -89,6 +90,16 @@ body {
   box-shadow:
     2px 2px 0 rgba(139, 119, 90, 0.2),
     inset 0 0 20px rgba(139, 119, 90, 0.05);
+  transition: border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+}
+
+.member-card.selected {
+  background: #fff0dc;
+  border-color: #b94820;
+  box-shadow:
+    0 0 0 2px rgba(196, 74, 26, 0.18),
+    3px 3px 0 rgba(107, 58, 31, 0.22),
+    inset 0 0 24px rgba(196, 74, 26, 0.08);
 }
 
 .member-header {
@@ -121,7 +132,7 @@ body {
 }
 
 .member-desc {
-  font-size: clamp(0.72rem, 2.2vw, 0.8rem);
+  font-size: clamp(0.8125rem, 2.5vw, 0.9rem);
   color: #6b5a3f;
   margin-left: auto;
   text-align: right;
@@ -226,11 +237,47 @@ body {
   right: 6px;
 }
 
+.member-status {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 3;
+  padding: 4px 9px;
+  color: #fff6e8;
+  background: #9f3215;
+  border: 1px solid #f0b05b;
+  border-radius: 2px;
+  font-family: Impact, 'Arial Black', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  pointer-events: none;
+}
+
+.member-card.selected .member-status {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .checkbox-row {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 0;
+  min-height: 52px;
+  padding: 6px 10px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+.member-card.selected .checkbox-row {
+  background: rgba(196, 74, 26, 0.08);
+  border-color: rgba(196, 74, 26, 0.3);
 }
 
 .checkbox-row input[type="checkbox"] {
@@ -239,26 +286,56 @@ body {
   accent-color: #c44a1a;
   flex-shrink: 0;
   cursor: pointer;
-  margin: 8px;
+  margin: 0 4px 0 0;
 }
 
-.checkbox-row label {
-  font-size: clamp(0.82rem, 2.5vw, 0.92rem);
+.checkbox-label {
+  font-size: clamp(0.9rem, 2.8vw, 1rem);
   color: #5a3a1f;
   font-weight: bold;
-  cursor: pointer;
-  user-select: none;
-  padding: 10px 0;
 }
 
-.submit-section {
-  padding: clamp(14px, 4vw, 24px) 0 clamp(20px, 5vw, 32px);
+.sticky-submit {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  z-index: 900;
+  width: min(100%, 480px);
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding:
+    10px
+    max(12px, env(safe-area-inset-right))
+    calc(10px + env(safe-area-inset-bottom))
+    max(12px, env(safe-area-inset-left));
+  background: rgba(245, 236, 215, 0.97);
+  border-top: 2px solid #8b775a;
+  box-shadow: 0 -4px 16px rgba(59, 46, 30, 0.2);
+  backdrop-filter: blur(6px);
+}
+
+.selection-status {
+  min-width: 92px;
+  color: #5a4a32;
+  font-size: 0.82rem;
+  line-height: 1.25;
   text-align: center;
 }
 
+.selection-status strong {
+  display: block;
+  color: #a13b19;
+  font-family: Impact, 'Arial Black', sans-serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+}
+
 .btn-submit {
-  display: inline-block;
-  padding: clamp(12px, 3vw, 16px) clamp(28px, 8vw, 48px);
+  flex: 1;
+  min-height: 48px;
+  padding: 10px 18px;
   font-family: Impact, 'Arial Black', sans-serif;
   font-size: clamp(1rem, 3.5vw, 1.2rem);
   color: #f5ecd7;
@@ -342,13 +419,14 @@ body {
 }
 
 .modal-score .score-text {
-  font-size: clamp(0.85rem, 2.8vw, 1rem);
+  font-size: clamp(0.9rem, 2.8vw, 1rem);
   color: #5a4a32;
+  font-weight: bold;
 }
 
 .modal-rank {
   text-align: center;
-  font-size: clamp(0.78rem, 2.3vw, 0.9rem);
+  font-size: clamp(0.82rem, 2.5vw, 0.92rem);
   color: #8b775a;
   padding: 10px 0 12px;
   border-bottom: 1px dashed #c4b898;
@@ -369,7 +447,7 @@ body {
 }
 
 .modal-ending .ending-text {
-  font-size: clamp(0.78rem, 2.3vw, 0.88rem);
+  font-size: clamp(0.84rem, 2.5vw, 0.92rem);
   color: #5a4a32;
   font-style: italic;
   line-height: 1.5;
@@ -382,7 +460,7 @@ body {
 
 .result-section h3 {
   font-family: Impact, 'Arial Black', sans-serif;
-  font-size: clamp(0.82rem, 2.5vw, 0.92rem);
+  font-size: clamp(0.9rem, 2.7vw, 1rem);
   margin-bottom: 4px;
   letter-spacing: 0.03em;
 }
@@ -397,7 +475,7 @@ body {
 }
 
 .result-list li {
-  font-size: clamp(0.75rem, 2.2vw, 0.85rem);
+  font-size: clamp(0.85rem, 2.5vw, 0.92rem);
   padding: 3px 0;
   border-bottom: 1px dotted #e0d5c0;
 }
@@ -412,7 +490,7 @@ body {
 
 .knowledge-section h3 {
   font-family: Impact, 'Arial Black', sans-serif;
-  font-size: clamp(0.82rem, 2.5vw, 0.92rem);
+  font-size: clamp(0.9rem, 2.7vw, 1rem);
   color: #6b3a1f;
   margin-bottom: 8px;
   letter-spacing: 0.03em;
@@ -428,18 +506,18 @@ body {
 
 .knowledge-item .ki-name {
   font-weight: bold;
-  font-size: clamp(0.78rem, 2.3vw, 0.85rem);
+  font-size: clamp(0.85rem, 2.5vw, 0.92rem);
   color: #6b3a1f;
 }
 
 .knowledge-item .ki-feature {
-  font-size: clamp(0.7rem, 2vw, 0.78rem);
+  font-size: clamp(0.8125rem, 2.4vw, 0.88rem);
   color: #c44a1a;
   margin: 2px 0;
 }
 
 .knowledge-item .ki-detail {
-  font-size: clamp(0.7rem, 2vw, 0.78rem);
+  font-size: clamp(0.8125rem, 2.4vw, 0.88rem);
   color: #5a4a32;
   line-height: 1.5;
 }
@@ -456,7 +534,7 @@ body {
 .btn-retry {
   padding: 10px 24px;
   font-family: Impact, 'Arial Black', sans-serif;
-  font-size: clamp(0.82rem, 2.5vw, 0.9rem);
+  font-size: clamp(0.9rem, 2.7vw, 1rem);
   border-radius: 3px;
   cursor: pointer;
   text-transform: uppercase;
@@ -521,7 +599,11 @@ body {
   <div id="memberList"></div>
 </div>
 
-<div class="submit-section">
+<div class="sticky-submit">
+  <div class="selection-status" id="selectionStatus" aria-live="polite">
+    已标记
+    <strong><span id="selectedCount">0</span> / 8</strong>
+  </div>
   <button class="btn-submit" id="btnSubmit">提交检测结果</button>
 </div>
 
@@ -534,8 +616,8 @@ body {
     </div>
     <div class="modal-body">
       <div class="modal-score">
-        <span class="score-num" id="scoreNum">0/4</span>
-        <p class="score-text">正确找出伪人</p>
+        <span class="score-num" id="scoreNum">抓获 0 / 4</span>
+        <p class="score-text" id="scoreText">漏判 0 人 · 误判 0 人</p>
       </div>
       <div class="modal-ending" id="modalEnding"></div>
       <div class="modal-rank" id="modalRank"></div>
@@ -592,12 +674,19 @@ function buildMemberCards() {
         <div class="slider-handle"></div>
         <span class="slider-label slider-label-before">档案照</span>
         <span class="slider-label slider-label-after">实拍</span>
+        <span class="member-status" aria-hidden="true">已隔离</span>
       </div>
-      <div class="checkbox-row">
+      <label class="checkbox-row" for="chk-${m.id}">
         <input type="checkbox" id="chk-${m.id}" value="${m.id}">
-        <label for="chk-${m.id}">标记为伪人</label>
-      </div>`;
+        <span class="checkbox-label">标记为伪人</span>
+      </label>`;
     container.appendChild(card);
+  });
+
+  container.addEventListener('change', (e) => {
+    if (e.target.matches('input[type="checkbox"]')) {
+      syncSelectionState();
+    }
   });
 }
 
@@ -674,6 +763,21 @@ function getCheckedIds() {
   return checked;
 }
 
+function syncSelectionState() {
+  let checkedCount = 0;
+
+  MEMBERS.forEach(m => {
+    const cb = document.getElementById('chk-' + m.id);
+    if (!cb) return;
+
+    const card = cb.closest('.member-card');
+    card.classList.toggle('selected', cb.checked);
+    if (cb.checked) checkedCount += 1;
+  });
+
+  document.getElementById('selectedCount').textContent = checkedCount;
+}
+
 function getEndingTitle(checkedIds, correctChecked, wrongChecked) {
   if (checkedIds.length === 8) {
     return {
@@ -691,6 +795,19 @@ function getEndingTitle(checkedIds, correctChecked, wrongChecked) {
     return {
       title: '敷衍了事',
       text: '你就随便勾了一个交差是吧。伪人已经混入营地，而你这个门卫的态度比伪人更让人担心。'
+    };
+  }
+  if (wrongChecked.length > 0) {
+    const missedCount = FAKE_IDS.length - correctChecked.length;
+    if (missedCount === 0) {
+      return {
+        title: '有功有过',
+        text: '四个伪人全部落网，但你也误判了 ' + wrongChecked.length + ' 名真正队员。威胁已经解除，门卫考评仍会记上一笔。'
+      };
+    }
+    return {
+      title: '真假难辨',
+      text: '你抓获了 ' + correctChecked.length + ' 名伪人，但漏判 ' + missedCount + ' 名、误判 ' + wrongChecked.length + ' 名真正队员。判断还需要更谨慎。'
     };
   }
 
@@ -712,7 +829,9 @@ function buildResult(checkedIds) {
 
   const score = correctChecked.length;
 
-  document.getElementById('scoreNum').textContent = score + ' / 4';
+  document.getElementById('scoreNum').textContent = '抓获 ' + score + ' / 4';
+  document.getElementById('scoreText').textContent =
+    '漏判 ' + missed.length + ' 人 · 误判 ' + wrongChecked.length + ' 人';
 
   const ending = getEndingTitle(checkedIds, correctChecked, wrongChecked);
   document.getElementById('modalEnding').innerHTML =
@@ -805,6 +924,7 @@ function resetAll() {
   document.querySelectorAll('.slider-handle').forEach(handle => {
     handle.style.left = '50%';
   });
+  syncSelectionState();
 }
 
 document.getElementById('btnSubmit').addEventListener('click', async () => {
@@ -856,6 +976,7 @@ if (typeof localStorage !== 'undefined') {
 
 buildMemberCards();
 initSliders();
+syncSelectionState();
 </script>
 
 </body>
